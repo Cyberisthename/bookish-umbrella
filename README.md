@@ -12,7 +12,18 @@ A fun, personality-driven AI assistant built specifically for paralegals! Take n
 
 ## 🚀 Quick Start (For Your Mom)
 
-### Option 1: Vercel Deployment (Easiest - No Setup!)
+### Option 1: Windows Standalone Executable (Easiest for Windows Users!)
+
+**No installation of Python, Node.js, or anything else required!**
+
+1. Download the Windows executable: `Paralegal AI Assistant Setup {version}.exe`
+2. Double-click to install
+3. Launch from your desktop or Start menu
+4. Start using immediately - everything is included!
+
+**See [STANDALONE_BUILD.md](./STANDALONE_BUILD.md) for building instructions.**
+
+### Option 2: Vercel Deployment (Easiest - No Setup!)
 
 1. **Click the Deploy button** (if available) or follow these steps:
 2. Go to [vercel.com](https://vercel.com) and create a free account
@@ -22,7 +33,7 @@ A fun, personality-driven AI assistant built specifically for paralegals! Take n
 6. Click **Deploy** and wait ~2 minutes
 7. That's it! Your app will be live at `https://your-app.vercel.app`
 
-### Option 2: Local Development
+### Option 3: Local Development
 
 ```bash
 # Install dependencies
@@ -135,6 +146,44 @@ my-project/
 │   └── schema.prisma     # Database schema
 └── vercel.json          # Vercel configuration
 ```
+
+## 🖥️ Windows Standalone Executable
+
+The project includes complete support for building standalone Windows executables:
+
+### Build Commands
+
+```bash
+# Build Windows standalone executable
+npm run build:windows:standalone
+
+# Build for other platforms
+npm run electron:mac      # macOS
+npm run electron:linux    # Linux
+```
+
+### Features
+
+- ✅ **No Dependencies Required** - Users don't need Python, Node.js, or anything else
+- ✅ **Everything Included** - Electron runtime, Node.js, Chromium, and all dependencies
+- ✅ **Two Options**:
+  - **NSIS Installer** - Professional installer with custom directory, shortcuts, and uninstaller
+  - **Portable Executable** - Run from anywhere without installation
+- ✅ **Local Database** - SQLite database stored in user's AppData
+- ✅ **Offline-First** - No external dependencies or internet connection required
+
+### Build Output
+
+After building, you'll find:
+- `dist/Paralegal AI Assistant Setup {version}.exe` - NSIS installer (~150-200 MB)
+- `dist/Paralegal AI Assistant {version}.exe` - Portable executable (~150-200 MB)
+
+### Documentation
+
+- [STANDALONE_BUILD.md](./STANDALONE_BUILD.md) - Comprehensive build guide
+- [WINDOWS_BUILD.md](./WINDOWS_BUILD.md) - Windows-specific instructions
+- [USER_GUIDE.md](./USER_GUIDE.md) - End-user quick start guide
+- [BUILD_COMPLETE.md](./BUILD_COMPLETE.md) - Setup verification and build status
 
 ## 🛠️ Tech Stack
 

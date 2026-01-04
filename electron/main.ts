@@ -30,7 +30,8 @@ function createWindow() {
   } else {
     // In production, start local server and load from it
     const { spawn } = require('child_process')
-    const serverProcess = spawn('bun', ['run', 'electron-server'], {
+    const serverScript = path.join(__dirname, 'electron-server.js')
+    const serverProcess = spawn(process.execPath, [serverScript], {
       cwd: process.cwd(),
       detached: true,
       stdio: 'ignore'
@@ -39,7 +40,7 @@ function createWindow() {
     // Give server time to start
     setTimeout(() => {
       mainWindow.loadURL('http://127.0.0.1:3000')
-    }, 2000)
+    }, 3000)
   }
 
   // Show window when ready

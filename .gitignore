@@ -17,8 +17,13 @@ node_modules
 /.next/
 /out/
 
-# production
-/build
+# electron builds
+/dist/
+/dist-electron/
+/*.exe
+/*.dmg
+/*.AppImage
+/*.deb
 
 # misc
 .DS_Store
