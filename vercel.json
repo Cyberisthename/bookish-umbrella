@@ -1,0 +1,15 @@
+{
+  "buildCommand": "bun run build",
+  "outputDirectory": ".next",
+  "installCommand": "bun install && bun run db:generate",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "DATABASE_URL": "@database_url"
+  },
+  "build": {
+    "env": {
+      "DATABASE_URL": "@database_url"
+    }
+  }
+}

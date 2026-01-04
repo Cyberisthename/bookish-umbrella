@@ -1,0 +1,35 @@
+ ⚠ Linting is disabled.
+61 |     "@radix-ui/react-toggle-group": "^1.1.10",
+         ^
+warn: Duplicate key "@radix-ui/react-toggle-group" in object literal
+   at /home/z/my-project/package.json:61:5
+
+182 | }
+       ^
+error: Expected "," but found end of file
+    at /home/z/my-project/package.json:182:2
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'excludeRoutes' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+   ▲ Next.js 15.3.5
+   - Environments: .env
+
+   Creating an optimized production build ...
+61 |     "@radix-ui/react-toggle-group": "^1.1.10",
+         ^
+warn: Duplicate key "@radix-ui/react-toggle-group" in object literal
+   at /home/z/my-project/package.json:61:5
+
+182 | }
+       ^
+error: Expected "," but found end of file
+    at /home/z/my-project/package.json:182:2
+[Browserslist] Could not parse /home/z/my-project/package.json. Ignoring it.
+
+> Build error occurred
+SyntaxError: JSON Parse error: Expected '}'
+while determining default 'output.uniqueName' from 'name' in /home/z/my-project/package.json
+    at parse (null) {
+  type: 'SyntaxError'
+}
+error: "next" exited with code 1

@@ -1,0 +1,24 @@
+$ bun run build && bun run build:electron && electron-builder -w
+$ next build --no-lint && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/
+ ⚠ Linting is disabled.
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'serverComponentsExternalPackages' at "experimental"
+ ⚠     Unrecognized key(s) in object: 'outputMode'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ `experimental.serverComponentsExternalPackages` has been moved to `serverExternalPackages`. Please update your next.config.ts file accordingly.
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+   ▲ Next.js 15.3.5
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 11.0s
+   Skipping validation of types
+   Collecting page data ...
+   Generating static pages (0/9) ...
+ ⨯ Next.js build worker exited with code: 1 and signal: null
+error: script "build" exited with code 1
+error: script "electron:windows" exited with code 1
