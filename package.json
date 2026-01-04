@@ -9,6 +9,8 @@
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
     "build": "next build --no-lint && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
     "build:prod": "next build --no-lint",
+    "build:electron": "tsc -p electron/tsconfig.json && bash scripts/fix-electron-build.sh",
+    "build:windows:standalone": "bash build-standalone-windows.sh",
     "start": "NODE_ENV=production node .next/standalone/server.js 2>&1 | tee server.log",
     "lint": "next lint",
     "db:push": "prisma db push",
@@ -20,9 +22,9 @@
     "electron:dev-simple": "npm run build:electron && electron .",
     "electron:pack": "npm run build && npm run build:electron && electron-builder --dir",
     "electron:dist": "npm run build && npm run build:electron && electron-builder",
-    "electron:windows": "bash build-windows.sh && cd dist/electron && electron-builder -w",
-    "electron:mac": "bash build-windows.sh && cd dist/electron && electron-builder -m",
-    "electron:linux": "bash build-windows.sh && cd dist/electron && electron-builder -l",
+    "electron:windows": "npm run build:prod && npm run build:electron && electron-builder -w",
+    "electron:mac": "npm run build:prod && npm run build:electron && electron-builder -m",
+    "electron:linux": "npm run build:prod && npm run build:electron && electron-builder -l",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
@@ -123,7 +125,9 @@
       "public/**/*",
       "prisma/**/*",
       "node_modules/.prisma/**/*",
-      "node_modules/@prisma/**/*"
+      "node_modules/@prisma/**/*",
+      "electron-server.js",
+      "electron/prisma-client-standalone.js"
     ],
     "extraResources": [
       {
@@ -133,17 +137,29 @@
       {
         "from": "node_modules/@prisma",
         "to": "node_modules/@prisma"
+      },
+      {
+        "from": ".next",
+        "to": ".next"
+      },
+      {
+        "from": "public",
+        "to": "public"
+      },
+      {
+        "from": "prisma",
+        "to": "prisma"
       }
     ],
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64", "arm64"]
+          "arch": ["x64"]
         },
         {
           "target": "portable",
-          "arch": ["x64", "arm64"]
+          "arch": ["x64"]
         }
       ],
       "icon": "build/icon.ico"

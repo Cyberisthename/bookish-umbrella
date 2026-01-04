@@ -1,4 +1,4 @@
-import { db } from '../../src/lib/db'
+import { db } from '../db'
 import ZAI from 'z-ai-web-dev-sdk'
 
 const personalities = {

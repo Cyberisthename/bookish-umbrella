@@ -1,7 +1,6 @@
 import { app } from 'electron'
 import * as path from 'path'
-import { spawn } from 'child_process'
-import { existsSync, mkdirSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 
 let dbInitialized = false
 
@@ -19,44 +18,34 @@ export async function setupDatabase() {
     }
 
     // Set DATABASE_URL environment variable for Electron
-    process.env.DATABASE_URL = `file:${path.join(appPath, 'database.db')}`
+    const dbPath = path.join(appPath, 'database.db')
+    process.env.DATABASE_URL = `file:${dbPath}`
 
-    // Initialize Prisma database
-    const prismaPath = path.join(process.cwd(), 'node_modules', '.bin', 'prisma')
+    // Create a simple schema file if it doesn't exist
+    const schemaPath = path.join(appPath, 'schema.prisma')
+    if (!existsSync(schemaPath)) {
+      const schema = `
+// This is a minimal schema for the standalone database
+// The actual schema is defined in prisma/schema.prisma
 
-    // Run prisma generate
-    await runCommand(prismaPath, ['generate'])
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
 
-    // Run prisma db push
-    await runCommand(prismaPath, ['db', 'push', '--skip-generate'])
+generator client {
+  provider = "prisma-client-js"
+}
+`
+      writeFileSync(schemaPath, schema.trim())
+    }
 
     dbInitialized = true
-    console.log('Database initialized at:', path.join(appPath, 'database.db'))
+    console.log('Database initialized at:', dbPath)
   } catch (error) {
     console.error('Failed to initialize database:', error)
     throw error
   }
-}
-
-function runCommand(command: string, args: string[]): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const process = spawn(command, args, {
-      shell: true,
-      stdio: 'inherit'
-    })
-
-    process.on('close', (code) => {
-      if (code === 0) {
-        resolve()
-      } else {
-        reject(new Error(`Command failed with exit code ${code}`))
-      }
-    })
-
-    process.on('error', (error) => {
-      reject(error)
-    })
-  })
 }
 
 export function getDatabasePath(): string {

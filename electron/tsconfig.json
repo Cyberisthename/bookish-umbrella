@@ -19,8 +19,10 @@
     "main.ts",
     "preload.ts",
     "database.ts",
+    "db.ts",
     "handlers.ts",
-    "api/*.ts"
+    "api/*.ts",
+    "prisma-client.ts"
   ],
   "exclude": [
     "node_modules",
